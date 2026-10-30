@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>王大科 · 新媒体作品集</title>
+<meta name="theme-color" content="#0a0e17">
+<meta name="description" content="王大科 · 新媒体作品集｜选择手机版或电脑版进入">
+<meta property="og:type" content="website">
+<meta property="og:title" content="王大科 · 新媒体作品集">
+<meta property="og:description" content="选择手机版或电脑版进入作品集。">
+<style>
+/* ========== 设计变量：与作品集同一套 ========== */
+:root{
+  --bg:#0a0e17;
+  --text:#e9edf7;
+  --muted:#93a1b8;
+  --border:rgba(255,255,255,.1);
+  --accent:#7c5cff;
+  --accent2:#00d2ff;
+  --accent3:#ff5c8a;
+  --grad:linear-gradient(120deg,var(--accent),var(--accent2));
+  --grad-3:linear-gradient(120deg,#ff5c8a,#7c5cff 50%,#00d2ff);
+  --font:"PingFang SC","HarmonyOS Sans SC","MiSans","Source Han Sans SC",
+         "Noto Sans SC","OPPO Sans","Microsoft YaHei","Hiragino Sans GB",
+         "Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font);-webkit-font-smoothing:antialiased;
+  display:grid;place-items:center;overflow:hidden;position:relative;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ========== 背景光斑 ========== */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg::before,.bg::after{
+  content:"";position:absolute;border-radius:50%;filter:blur(96px);opacity:.55;
+}
+.bg::before{
+  width:min(72vw,780px);aspect-ratio:1;left:-16vw;top:-22vh;
+  background:radial-gradient(circle,var(--accent) 0%,transparent 66%);
+}
+.bg::after{
+  width:min(66vw,720px);aspect-ratio:1;right:-14vw;bottom:-24vh;
+  background:radial-gradient(circle,var(--accent2) 0%,transparent 66%);
+}
+/* 中间压暗，让按钮浮在光上 */
+.bg i{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,
+    rgba(10,14,23,0) 0%,rgba(10,14,23,.5) 62%,rgba(10,14,23,.9) 100%);
+}
+
+/* ========== 四散漂浮的 emoji 装饰 ========== */
+.deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.deco span{
+  position:absolute;
+  left:var(--x,50%);top:var(--y,50%);
+  font-size:clamp(20px,2.6vw,44px);
+  line-height:1;
+  opacity:.20;
+  transform:rotate(var(--r,0deg)) scale(var(--s,1));
+  animation:decoFloat var(--dur,8s) ease-in-out infinite;
+  animation-delay:var(--d,0s);
+  filter:saturate(.9) drop-shadow(0 6px 14px rgba(0,0,0,.35));
+  will-change:transform;
+  user-select:none;
+}
+@keyframes decoFloat{
+  0%,100%{ transform:translateY(0) rotate(var(--r,0deg)) scale(var(--s,1)); }
+  50%    { transform:translateY(-16px) rotate(calc(var(--r,0deg) + 7deg)) scale(var(--s,1)); }
+}
+
+/* ========== 两个按钮（样式完全一致） ========== */
+.stage{
+  position:relative;z-index:1;
+  display:flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:22px;padding:24px;flex-wrap:wrap;
+}
+.btn{
+  position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-width:250px;
+  padding:26px 42px;
+  border-radius:999px;
+  font-size:1.22rem;font-weight:900;letter-spacing:.02em;line-height:1.2;
+  white-space:nowrap;text-decoration:none;
+  color:#fff;background:var(--grad);
+  border:1.5px solid transparent;
+  box-shadow:0 18px 40px -18px var(--accent);
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),
+             filter .28s var(--ease);
+}
+/* 图标统一尺寸与基线，两个按钮视觉完全对等 */
+.btn .ico{
+  font-size:1.35rem;line-height:1;flex:none;
+  display:inline-grid;place-items:center;
+}
+.btn:hover,.btn:focus-visible{
+  transform:translateY(-4px);
+  filter:brightness(1.06);
+  box-shadow:0 28px 56px -20px var(--accent);
+}
+.btn:active{transform:translateY(-1px) scale(.985);}
+.btn:focus-visible{outline:2px solid var(--accent2);outline-offset:4px;}
+
+/* 悬停时一道流光扫过 */
+.btn::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .7s var(--ease);
+  pointer-events:none;
+}
+.btn:hover::after,.btn:focus-visible::after{transform:translateX(120%);}
+
+/* ========== 手机：竖排占满 ========== */
+@media (max-width:720px){
+  .stage{flex-direction:column;gap:16px;width:100%;max-width:420px;}
+  .btn{width:100%;min-width:0;padding:22px 24px;font-size:1.08rem;}
+  .btn .ico{font-size:1.2rem;}
+  .deco span{font-size:clamp(18px,4.6vw,30px);opacity:.16;}
+  /* 小屏隐藏一部分，避免和按钮抢位置 */
+  .deco span:nth-child(3n){display:none;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .btn,.btn::after{transition:none;}
+  .btn:hover,.btn:focus-visible,.btn:active{transform:none;}
+  .deco span{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"><i></i></div>
+
+<!-- 装饰 emoji：只放边缘，中间留给按钮 -->
+<div class="deco" aria-hidden="true">
+  <span style="--x:5%; --y:12%; --s:1.45;--r:-9deg; --d:0s;  --dur:8.2s">🎥</span>
+  <span style="--x:9%; --y:33%; --s:.85; --r:12deg; --d:-2.4s;--dur:6.9s">✂️</span>
+  <span style="--x:4%; --y:54%; --s:1.15;--r:-6deg; --d:-1.2s;--dur:9.1s">📈</span>
+  <span style="--x:10%;--y:75%; --s:.78; --r:14deg; --d:-3.6s;--dur:7.6s">💬</span>
+  <span style="--x:6%; --y:91%; --s:1.30;--r:-12deg;--d:-.8s; --dur:8.8s">🎯</span>
+
+  <span style="--x:26%;--y:7%;  --s:.92; --r:8deg;  --d:-2s;  --dur:7.9s">🔥</span>
+  <span style="--x:47%;--y:4%;  --s:1.22;--r:-7deg; --d:-4.1s;--dur:9.4s">📱</span>
+  <span style="--x:69%;--y:8%;  --s:.86; --r:11deg; --d:-1.6s;--dur:8.1s">🎞️</span>
+
+  <span style="--x:92%;--y:11%; --s:1.35;--r:-10deg;--d:-2.7s;--dur:7.4s">📊</span>
+  <span style="--x:88%;--y:31%; --s:.80; --r:13deg; --d:-.6s; --dur:9.0s">🎤</span>
+  <span style="--x:94%;--y:52%; --s:1.18;--r:-5deg; --d:-3.3s;--dur:8.5s">💡</span>
+  <span style="--x:87%;--y:72%; --s:.88; --r:9deg;  --d:-1.9s;--dur:7.7s">🎬</span>
+  <span style="--x:91%;--y:92%; --s:1.40;--r:-8deg; --d:-4.6s;--dur:8.9s">🚀</span>
+
+  <span style="--x:28%;--y:94%; --s:1.05;--r:10deg; --d:-2.2s;--dur:8.3s">🏆</span>
+  <span style="--x:50%;--y:97%; --s:.82; --r:-11deg;--d:-3.9s;--dur:7.2s">⭐</span>
+  <span style="--x:72%;--y:93%; --s:1.12;--r:7deg;  --d:-1.4s;--dur:9.2s">✨</span>
+</div>
+
+<main class="stage">
+  <a class="btn" id="btnPhone" href="作品集-手机版.html">
+    <span class="ico" aria-hidden="true">📱</span>手机版查看
+  </a>
+  <a class="btn" id="btnPc" href="王大科-新媒体作品集.html">
+    <span class="ico" aria-hidden="true">💻</span>电脑版查看
+  </a>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var phone = document.getElementById('btnPhone');
+  var isMobile = window.matchMedia && window.matchMedia('(max-width:760px)').matches;
+
+  /* 在电脑上点「手机版」→ 开一个手机尺寸窗口，才能看到真正的手机版排版；
+     本身就窄屏则直接跳转。 */
+  phone.addEventListener('click', function(e){
+    if (isMobile) return;
+    var w = 414, h = 896;
+    var left = Math.max(0, (screen.availWidth  - w) / 2);
+    var top  = Math.max(0, (screen.availHeight - h) / 2);
+    var win = window.open(
+      phone.href, 'phonePreview',
+      'width=' + w + ',height=' + h +
+      ',left=' + Math.round(left) + ',top=' + Math.round(top) +
+      ',menubar=no,toolbar=no,location=no,status=no'
+    );
+    if (win){ e.preventDefault(); win.focus(); }   /* 被拦截则退回普通跳转 */
+  });
+})();
+</script>
+</body>
+</html>
